@@ -16,6 +16,7 @@ class App extends Component {
             <NavLink exact to="/">
               Home
             </NavLink>
+            &nbsp;|&nbsp;
             <NavLink to="/jokes">Jokes</NavLink>
             &nbsp;|&nbsp;
             <NavLink to="/signin">Sign In</NavLink>
@@ -24,8 +25,8 @@ class App extends Component {
         <main>
           <Route exact path="/" component={Home} />
           <Route path="/jokes" component={Jokes} />
-          <Route path="/signin" component={Signin} />
-          <Route path="/register" component={Register} />
+          <Route path="/signin" render={props => <Signin {...props} />} />
+          <Route path="/register" render={props => <Register {...props} />} />
         </main>
       </div>
     );
