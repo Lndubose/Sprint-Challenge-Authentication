@@ -41,6 +41,24 @@ function register(req, res) {
 
 function login(req, res) {
   // implement user login
+  const creds = req.body;
+
+  db('users')
+    .where({ username: creds.username })
+    .first()
+    .then(user => {
+      if (user && bcrypt.compareSync(creds.password, user.password)) {
+        const token = generateToken();
+        res.status(200).json({ id: user.id, username: user.username, token });
+      } else {
+        res
+          .status(401)
+          .json({ message: 'Incorrect username and/or password.' });
+      }
+    })
+    .catch(err => {
+      res.status(500).json({ error: `Server error --> ${err}` });
+    });
 }
 
 function getJokes(req, res) {
