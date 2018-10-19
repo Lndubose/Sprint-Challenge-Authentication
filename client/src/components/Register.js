@@ -1,5 +1,9 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
+
+import { Container } from '../styles/GlobalStyles';
+import { Label, Input, Button } from '../styles/FormStyles';
 
 class Register extends React.Component {
   state = {
@@ -32,30 +36,39 @@ class Register extends React.Component {
   render() {
     return (
       <div>
-        <h2>Register</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">
-            <input
-              name="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-          {this.state.nameUsed ? <p>Username is already used.</p> : null}
-          <label htmlFor="password">
-            <input
-              name="password"
-              type="text"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <button type="submit">Register</button>
-        </form>
+        <Container>
+          <h2>Register</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Label htmlFor="username">
+              {' '}
+              Username
+              <Input
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </Label>
+            {this.state.nameUsed ? <p>Username is already used.</p> : null}
+            <Label htmlFor="password">
+              Password
+              <Input
+                name="password"
+                type="text"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </Label>
+            <RegisterButton type="submit">Register</RegisterButton>
+          </form>
+        </Container>
       </div>
     );
   }
 }
 
 export default Register;
+
+const RegisterButton = styled(Button)`
+  margin-top: 10px;
+`;

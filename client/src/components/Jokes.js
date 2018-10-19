@@ -3,6 +3,8 @@ import axios from 'axios';
 
 import Joke from './Joke';
 
+import { Container } from '../styles/GlobalStyles';
+
 class Jokes extends React.Component {
   state = {
     jokes: [],
@@ -33,15 +35,17 @@ class Jokes extends React.Component {
   render() {
     return (
       <div>
-        <h1>Jokes for You</h1>
-        {this.state.signin ? (
-          this.state.jokes.map((joke, index) => (
-            <Joke key={index} joke={joke} />
-          ))
-        ) : (
-          <h4>Please Sign In to see Jokes!</h4>
-        )}
-        <button onClick={this.callServerHandle}>Randomize</button>
+        <Container>
+          <h1>Jokes for You</h1>
+          {this.state.signin ? (
+            this.state.jokes.map((joke, index) => (
+              <Joke key={index} joke={joke} />
+            ))
+          ) : (
+            <h4>Please Sign In to see Jokes!</h4>
+          )}
+          <button onClick={this.callServerHandle}>Randomize</button>
+        </Container>
       </div>
     );
   }

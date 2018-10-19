@@ -1,6 +1,10 @@
 import React from 'react';
 import axios from 'axios';
+import styled from 'styled-components';
 import { NavLink } from 'react-router-dom';
+
+import { Container } from '../styles/GlobalStyles';
+import { Label, Input, Button } from '../styles/FormStyles';
 
 class Signin extends React.Component {
   state = {
@@ -29,30 +33,46 @@ class Signin extends React.Component {
   render() {
     return (
       <div>
-        <h2>Sign In</h2>
-        <form onSubmit={this.handleSubmit}>
-          <label htmlFor="username">
-            <input
-              name="username"
-              type="text"
-              value={this.state.username}
-              onChange={this.handleChange}
-            />
-          </label>
-          <label htmlFor="password">
-            <input
-              name="password"
-              type="password"
-              value={this.state.password}
-              onChange={this.handleChange}
-            />
-          </label>
-          <button type="submit">Sign In</button>
-          <NavLink to="/register">Register</NavLink>
-        </form>
+        <Container>
+          <h2>Sign In</h2>
+          <form onSubmit={this.handleSubmit}>
+            <Label htmlFor="username">
+              {' '}
+              Username
+              <Input
+                name="username"
+                type="text"
+                value={this.state.username}
+                onChange={this.handleChange}
+              />
+            </Label>
+            <Label htmlFor="password">
+              {' '}
+              Password
+              <Input
+                name="password"
+                type="password"
+                value={this.state.password}
+                onChange={this.handleChange}
+              />
+            </Label>
+            <SignIn type="submit">Sign In</SignIn>
+            <NavLink to="/register">
+              <Register>Register</Register>
+            </NavLink>
+          </form>
+        </Container>
       </div>
     );
   }
 }
 
 export default Signin;
+
+const UsernameInput = styled(Input)``;
+
+const Register = styled(Button)`
+  margin-left: 5%;
+`;
+
+const SignIn = styled(Button)``;
