@@ -7,9 +7,14 @@ class Jokes extends React.Component {
   state = {
     jokes: [],
     signin: false,
+    random: false,
   };
 
   componentDidMount() {
+    this.callServerHandle();
+  }
+
+  callServerHandle = e => {
     const token = localStorage.getItem('jwt');
     const options = {
       headers: {
@@ -23,10 +28,6 @@ class Jokes extends React.Component {
         this.setState({ signin: true, jokes: response.data });
       })
       .catch(err => console.log('Not Authorized', err));
-  }
-
-  randomizeHandle = e => {
-    document.location.reload();
   };
 
   render() {
@@ -34,11 +35,13 @@ class Jokes extends React.Component {
       <div>
         <h1>Jokes for You</h1>
         {this.state.signin ? (
-          this.state.jokes.map(joke => <Joke key={joke.id} joke={joke} />)
+          this.state.jokes.map((joke, index) => (
+            <Joke key={index} joke={joke} />
+          ))
         ) : (
           <h4>Please Sign In to see Jokes!</h4>
         )}
-        <button onClick={this.randomizeHandle}>Randomize</button>
+        <button onClick={this.callServerHandle}>Randomize</button>
       </div>
     );
   }
